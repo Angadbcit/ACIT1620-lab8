@@ -84,12 +84,11 @@ async function getUsers() {
    * 
    */
 
-  // Your code here
-  const url = "https://jsonplaceholder.typicode.com/users";
+  // Your code here 
   try {
-    const response = await fetch(url);
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
     const users = await response.json();
-    return populateSelectionOptions(users)
+    populateSelectionOptions(users)
   } catch(error) {
     console.error(error);
   }
@@ -103,12 +102,13 @@ async function getPosts(user) {
 
 // Your code here
   try {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/posts${user.id}`);
+    const res = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${user.id}`);
     const posts = await res.json();
-    console.log(posts)
+    displayPosts(posts, user.name);
+    displayOwnPosts();
   } catch(error) {
     console.error(error);
   }
-} 
+}
 
 getUsers();

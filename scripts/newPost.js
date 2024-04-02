@@ -9,14 +9,15 @@ async function addPost(post) {
 
     // Your code here
     try {
-        const posts = localStorage.getItem('posts');
-        if (posts === null) {
-            localStorage.setItem('posts', JSON.stringify([]))
+        let posts;
+        if (localStorage.length !== 0) {
+            posts = JSON.parse(localStorage.getItem('posts'));
         }
-        let newposts = JSON.parse(localStorage.getItem('posts'));
-        newposts.unshift(post);
-        localStorage.setItem('posts', JSON.stringify(newpost))
-        JSON.parse(localStorage.getItem('posts'))
+        else {
+            posts = [];
+        }
+        posts.unshift(post);
+        localStorage.setItem('posts', JSON.stringify(posts));
     } catch(error) {
     console.error(error);
     }
